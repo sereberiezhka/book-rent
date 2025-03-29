@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Аренда детских книг</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- Здесь будет отображаться контент в зависимости от выбранного раздела -->
+        <div id="loading">Загрузка...</div>
+        
+        <div id="auth-container" style="display: none;">
+            <h2>Войдите через Telegram</h2>
+            <div id="telegram-login-container"></div>
+        </div>
+        
+        <div id="main-content" style="display: none;">
+            <!-- Заголовок с именем пользователя -->
+            <div class="header">
+                <h1>Аренда детских книг</h1>
+                <div id="user-info"></div>
+            </div>
+            
+            <!-- Меню навигации -->
+            <div class="navigation">
+                <button class="nav-button active" data-section="available-books">📚 Доступные книги</button>
+                <button class="nav-button" data-section="my-rentals">📦 Мои аренды</button>
+                <button class="nav-button" data-section="rental-history">🕒 История аренд</button>
+                <button class="nav-button" data-section="my-account">ℹ Мой аккаунт</button>
+            </div>
+            
+            <!-- Контейнеры для разных разделов -->
+            <div id="available-books" class="section">
+                <h2>Доступные книги</h2>
+                <div class="filters">
+                    <input type="text" id="search-book" placeholder="Поиск по названию">
+                    <select id="age-filter">
+                        <option value="">Все возрасты</option>
+                        <option value="0-2">0-2 года</option>
+                        <option value="3-5">3-5 лет</option>
+                        <option value="6-8">6-8 лет</option>
+                        <option value="9-12">9-12 лет</option>
+                        <option value="12+">12+ лет</option>
+                    </select>
+                </div>
+                <div id="books-container" class="books-grid"></div>
+            </div>
+            
+            <div id="my-rentals" class="section" style="display: none;">
+                <h2>Мои аренды</h2>
+                <div id="my-rentals-container" class="books-grid"></div>
+            </div>
+            
+            <div id="rental-history" class="section" style="display: none;">
+                <h2>История аренд</h2>
+                <div id="history-container"></div>
+            </div>
+            
+            <div id="my-account" class="section" style="display: none;">
+                <h2>Мой аккаунт</h2>
+                <div id="account-info"></div>
+                <div id="subscription-info"></div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Шаблоны для карточек книг -->
+    <template id="book-card-template">
+        <div class="book-card">
+            <div class="book-cover">
+                <img src="" alt="Обложка книги">
+                <div class="book-status"></div>
+            </div>
+            <div class="book-info">
+                <h3 class="book-title"></h3>
+                <p class="book-age"></p>
+                <p class="book-description"></p>
+                <button class="rent-button">Арендовать</button>
+            </div>
+        </div>
+    </template>
+    
+    <template id="rental-card-template">
+        <div class="rental-card">
+            <div class="book-cover">
+                <img src="" alt="Обложка книги">
+            </div>
+            <div class="rental-info">
+                <h3 class="book-title"></h3>
+                <p class="rental-date"></p>
+                <p class="due-date"></p>
+                <button class="return-button">Вернуть книгу</button>
+            </div>
+        </div>
+    </template>
+    
+    <!-- JavaScript -->
+    <script src="js/api.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
